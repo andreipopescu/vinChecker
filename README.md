@@ -35,4 +35,5 @@ You can also parse the `--vignette` argument to check if the vehicle has a valid
 You can run it with docker:
 
 `docker compose run --rm vin <vin>`
+
 `docker compose run --rm plate <plate>`
