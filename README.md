@@ -31,3 +31,8 @@ In order to run **vinChecker**, navigate to it's directory and run the following
 ![PLATE CHECK](https://user-images.githubusercontent.com/43548656/180734297-2001591c-f304-4ee2-9599-bcc513f369b0.png)
 
 You can also parse the `--vignette` argument to check if the vehicle has a valid vignette.
+
+You can run it with docker:
+
+`docker compose run --rm vin <vin>`
+`docker compose run --rm plate <plate>`
