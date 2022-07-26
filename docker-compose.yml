@@ -1,0 +1,14 @@
+---
+version: '3.9'
+
+services:
+  vin:
+    build: .
+    image: vinchecker
+    entrypoint: ["node", "app.js", "--vignette", "--vin"]
+  
+  plate:
+    image: vinchecker
+    entrypoint: ["node", "app.js", "--vignette", "--plate"]
+
+...
