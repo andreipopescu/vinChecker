@@ -1,6 +1,6 @@
 # vinChecker
 
-**vinChecker** is a command line tool built with node, which helps gather infomation on a romanian reegistered car, based on the registration number or the VIN. This is the beta version and you are welcome to fork the reepo and improve or add new features.
+**vinChecker** is a command line tool built with node, designed to gather infomation on a Romanian registered cars, based on their registration number or the VIN. This is the beta version and you are welcome to fork the repo and improve or add new features.
 
 ![Screen Recording 2022-07-25 at 11 23 27](https://user-images.githubusercontent.com/43548656/180732592-e6e99722-43d5-4134-83dc-78f8627deabb.gif)
 
@@ -9,8 +9,6 @@
 - Vehicle data identification based on plate no. or VIN
 - National stolen cars database identification
 - Vignette identification
-
-
 
 ## Prerequisites 
 **vinChecker** is built with node 16.15.1 and uses `axios` and `minimis`.
@@ -26,7 +24,7 @@ npm i
 ## Using vinChecker
 In order to run **vinChecker**, navigate to it's directory and run the following command:
 `node app.js` followed by **one** of the two required arguments: 
-- `--vin=` - seearch by VIN no.
+- `--vin=` - sarch by VIN no.
 ![VIN CHECK](https://user-images.githubusercontent.com/43548656/180733298-4e75c305-1140-43e6-ae5c-bcc413957655.png)
 
 - `--plate=` - search by registration no.

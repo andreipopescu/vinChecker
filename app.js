@@ -8,17 +8,16 @@ const COLORS = {
     'blue':'\x1b[34m%s\x1b[0m',
     'cyan':'\x1b[36m%s\x1b[0m',
     'magenta':'\x1b[35m%s\x1b[0m'
-    
 }
 
 var VIN_NO = null
 
 const getVignette = async (vin) => {
-    console.log(COLORS.yellow ,`\n[i] Checking vignette for ${vin}`)
+    console.log(COLORS.yellow ,`\n[i] Checking vignette for ${vin.toUpperCase()}`)
     try {
-        let response = await axios.get(`https://www.erovinieta.ro/vgncheck/api/findVignettes\?plateNumber\=B100ABC\&vin\=${vin}\&cacheBuster\=1655203595103`)
+        let response = await axios.get(`https://www.erovinieta.ro/vgncheck/api/findVignettes\?plateNumber\=B100ABC\&vin\=${vin.toUpperCase()}\&cacheBuster\=1655203595103`)
         if ( response.data.length != 0 ) {
-            console.log(COLORS.cyan, `[+] Vehicle ${vin} identified!`)
+            console.log(COLORS.cyan, `[+] Vehicle ${vin.toUpperCase()} identified!`)
             console.log(COLORS.magenta, `   [+] Registration number: ${response.data[0].nrAuto}`)
             console.log(COLORS.magenta, `   [+] VIN number: ${response.data[0].serieSasiu}`)
             console.log(COLORS.cyan, `   [+] Vignette valid until: ${response.data[0].dataStop}\n`)
@@ -32,7 +31,7 @@ const getVignette = async (vin) => {
 
 const getAllianz = async (plate=null, vin=null) => {
     if ( plate != null ) {
-        console.log(COLORS.yellow ,`\n[i] Attenpting to ideentify data based on plante no.: ${plate.toUpperCase()}`)
+        console.log(COLORS.yellow ,`\n[i] Attenpting to identify data based on plante no.: ${plate.toUpperCase()}`)
         try {
             let response = await axios.get(`https://mobil.allianztiriac.ro/api/myCar/vin\?licensePlateNumber\=${plate.toUpperCase()}\&requestId\=62cfc78c2d4368230086028e`)
             console.log(COLORS.cyan, `[+] Vehicle identified!`)
@@ -44,16 +43,16 @@ const getAllianz = async (plate=null, vin=null) => {
             console.log(COLORS.magenta, `   [+] Year: ${response.data.vehicleYear}`)
             console.log(COLORS.magenta, `   [+] Energy Source: ${response.data.vehicleEnergySource}`)
             console.log(COLORS.magenta, `   [+] CC: ${response.data.vehicleCubicCapacity}`)
-            console.log(COLORS.magenta, `   [+] HP: ${response.data.vehicleEnginePower}`)
+            console.log(COLORS.magenta, `   [+] kW: ${response.data.vehicleEnginePower}`)
             VIN_NO = response.data.vehicleIdentificationNumber
         } catch (e) {
             console.log(COLORS.red, '[-] Unable to retrieve data from Allianz!')
         }
     }
     if ( vin != null ) {
-        console.log(COLORS.yellow ,`\n[i] Attenpting to identify data based on VIN no.: ${vin}`)
+        console.log(COLORS.yellow ,`\n[i] Attenpting to identify data based on VIN no.: ${vin.toUpperCase()}`)
         try {
-            let response = await axios.get(`https://mobil.allianztiriac.ro/api/myCar/vin\?vin\=${vin}\&requestId\=62cfc78c2d4368230086028e`)
+            let response = await axios.get(`https://mobil.allianztiriac.ro/api/myCar/vin\?vin\=${vin.toUpperCase()}\&requestId\=62cfc78c2d4368230086028e`)
             console.log(COLORS.cyan, `[+] Vehicle ${vin} identified!`)
             console.log(COLORS.magenta, `   [+] VIN: ${response.data.vehicleIdentificationNumber}`)
             console.log(COLORS.magenta, `   [+] Registration number: ${response.data.vehiclePlateNo}`)
@@ -63,7 +62,7 @@ const getAllianz = async (plate=null, vin=null) => {
             console.log(COLORS.magenta, `   [+] Year: ${response.data.vehicleYear}`)
             console.log(COLORS.magenta, `   [+] Energy Source: ${response.data.vehicleEnergySource}`)
             console.log(COLORS.magenta, `   [+] CC: ${response.data.vehicleCubicCapacity}`)
-            console.log(COLORS.magenta, `   [+] HP: ${response.data.vehicleEnginePower}`)
+            console.log(COLORS.magenta, `   [+] kW: ${response.data.vehicleEnginePower}`)
         } catch (e) {
             console.log(COLORS.red, '[-] Unable to retrieve data from Allianz!')
         }
@@ -73,9 +72,9 @@ const getAllianz = async (plate=null, vin=null) => {
 const getStolen = async (vin) => {
     console.log(COLORS.yellow ,`\n[i] Checking if stolen vehicle.`)
     try {
-        let response = await axios.get(`https://www.politiaromana.ro/ro/auto-furate?marca=&serie=${vin}&categorie=`)
+        let response = await axios.get(`https://www.politiaromana.ro/ro/auto-furate?marca=&serie=${vin.toUpperCase()}&categorie=`)
         if ( response.data.includes('Nu există rezultate!') ) {
-            console.log(COLORS.cyan, `  [+] Vehicle ${vin} does not apear to be stolen from Romania!`)
+            console.log(COLORS.cyan, `   [+] Vehicle ${vin.toUpperCase()} does not apear to be stolen from Romania!`)
         } else {
             console.log(COLORS.red, '   [-] ATTENTION!!! Vehicle listed as STOLEN by romanian authorities!')
         }
